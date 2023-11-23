@@ -16,23 +16,35 @@ import { Link } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import React, { useContext  } from "react";
 import { MoviesContext } from "../../contexts/moviesContext";
-
-
+import PlaylistAddCheckCircleIcon from '@mui/icons-material/PlaylistAddCheckCircle';
+import PlaylistAddCheckCircle from "@mui/icons-material/PlaylistAddCheckCircle";
 
 export default function MovieCard({ movie, action }) {
   const { favorites, addToFavorites } = useContext(MoviesContext);
-
+ 
   if (favorites.find((id) => id === movie.id)) {
     movie.favorite = true;
   } else {
     movie.favorite = false
   }
 
+  const { mustWatch, addToWatchList } = useContext(MoviesContext);
+
+  if (mustWatch.find((id) => id === movie.id)) {
+    movie.watch = true;
+  } else {
+    movie.watch = false
+  }
+
+ 
+
   const handleAddToFavorite = (e) => {
     e.preventDefault();
     addToFavorites(movie);
   };
 
+
+  
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
@@ -40,6 +52,11 @@ export default function MovieCard({ movie, action }) {
           movie.favorite ? (
             <Avatar sx={{ backgroundColor: 'red' }}>
               <FavoriteIcon />
+            </Avatar>
+          ) : 
+          movie.watch ? (
+            <Avatar sx={{ backgroundColor: 'red'}}>
+              <PlaylistAddCheckCircleIcon/>
             </Avatar>
           ) : null
         }
