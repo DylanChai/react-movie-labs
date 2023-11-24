@@ -1,16 +1,15 @@
 import React, { } from "react";
-import MovieHeader from "../headerMovie";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { getMovieImages } from "../../api/tmdb-api";
+import { getActorImages } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
 
-const TemplateMoviePage = ({ movie, children }) => {
+const TemplateActorPage = ({ actor }) => {
   const { data , error, isLoading, isError } = useQuery(
-    ["images", { id: movie.id }],
-    getMovieImages
+    ["images", { id: actor.id }],
+    getActorImages
   );
 
   if (isLoading) {
@@ -24,7 +23,7 @@ const TemplateMoviePage = ({ movie, children }) => {
   
   return (
     <>
-      <MovieHeader movie={movie} />
+      <MovieHeader actor={actor} />
 
       <Grid container spacing={5} sx={{ padding: "15px" }}>
         <Grid item xs={3}>
@@ -46,13 +45,9 @@ const TemplateMoviePage = ({ movie, children }) => {
             </ImageList>
           </div>
         </Grid>
-
-        <Grid item xs={9}>
-          {children}
-        </Grid>
       </Grid>
     </>
   );
 };
 
-export default TemplateMoviePage;
+export default TemplateActorPage;
