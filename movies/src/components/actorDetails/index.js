@@ -1,14 +1,9 @@
-
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import MonetizationIcon from "@mui/icons-material/MonetizationOn";
-import StarRate from "@mui/icons-material/StarRate";
-import NavigationIcon from "@mui/icons-material/Navigation";
-import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import Drawer from "@mui/material/Drawer";
+
 
 const root = {
     display: "flex",
@@ -18,8 +13,10 @@ const root = {
     padding: 1.5,
     margin: 0,
 };
+
 const chip = { margin: 0.5 };
-const ActorDetails = ({ actor }) => {  // Don't miss this!
+
+const ActorDetails = ({ actor }) => {  
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
@@ -33,11 +30,19 @@ const ActorDetails = ({ actor }) => {  // Don't miss this!
       </Typography>
 
       <Paper component="ul" sx={{...root}}>
-      </Paper>
+      <li>
+          <Chip label="Birthday" sx={{...chip}} color="primary" />
+        </li>
+        <li>
+            <Chip label={actor.birthday} sx={{...chip}} />
+          </li>
 
-      <Paper component="ul" sx={{...root}}>
-        <Chip label={`Birthday: ${actor.birthday}`} />
       </Paper>
+
+<Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+        
+      </Drawer>
+
       </>
   );
 };

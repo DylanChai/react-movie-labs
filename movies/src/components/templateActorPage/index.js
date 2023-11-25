@@ -5,8 +5,9 @@ import ImageListItem from "@mui/material/ImageListItem";
 import { getActorImages } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
+import ActorHeader from "../headerActor";
 
-const TemplateActorPage = ({ actor }) => {
+const TemplateActorPage = ({ actor, children}) => {
   const { data , error, isLoading, isError } = useQuery(
     ["images", { id: actor.id }],
     getActorImages
@@ -19,11 +20,11 @@ const TemplateActorPage = ({ actor }) => {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-  const images = data.posters
+  const images = data.profiles
   
   return (
     <>
-      <MovieHeader actor={actor} />
+      <ActorHeader actor={actor} />
 
       <Grid container spacing={5} sx={{ padding: "15px" }}>
         <Grid item xs={3}>
@@ -38,7 +39,7 @@ const TemplateActorPage = ({ actor }) => {
                     <ImageListItem key={image.file_path} cols={1}>
                     <img
                         src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
-                        alt={image.poster_path}
+                        alt={image.profile_path}
                     />
                     </ImageListItem>
                 ))}

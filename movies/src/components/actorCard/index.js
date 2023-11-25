@@ -30,8 +30,8 @@ export default function ActorCard({ actor }) {
       <CardMedia
         sx={{ height: 500 }}
         image={
-          actor.image
-            ? `https://image.tmdb.org/t/p/w500/${actor.poster_path}`
+          actor.profile_path
+            ? `https://image.tmdb.org/t/p/w500/${actor.profile_path}`
             : img
         }
       />
