@@ -1,37 +1,52 @@
-# Assignment 1 - ReactJS app.
-
+Assignment 1 - ReactJS App
 Name: Dylan Chai
 
-## Overview.
+Overview
+I have implemented additional features to enhance my React Movie Labs application.
 
-Implemented Additional Features to my React Movie Labs
-
-### Features.
- 
+Features
 Pagination
-Actors 
+Actors
 Actor Details
-Latest 
-Trending Movies 
-Navy SiteHeader
-![image](https://github.com/DylanChai/react-movie-labs/assets/91637804/3242c6e3-6152-48a7-845a-2236b50e3d61)
+Latest Movies
+Trending Movies
+Navy Site Header
+Image
 
-## Setup requirements.
+Setup Requirements
+To set up this project, the following requirements were fulfilled:
 
-Installed NPM, also ensured my API Key was functioning correctly in order to call the API'S.
+Installed NPM
+Ensured my API Key was functioning correctly in order to make API calls.
+API Endpoints
+I used the following additional TMDB endpoints in my application, along with their descriptions and pathnames:
 
-## API endpoints.
+Latest Movies
 
-[ List the __additional__ TMDB endpoints used, giving the description and pathname for each one.] 
+Description: Retrieves the list of the latest movies.
+Pathname: https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1
+Trending Movies
 
-Latest Movies - https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1
-Trending - https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_TMDB_KEY}&page=${page}
-Actor Images - https://api.themoviedb.org/3/person/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}
-Actor - https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}
-Actors - https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&page=${page}
-## Routing.
-   /movies/watchlist
-   /actors
-    /actor/:id
-      /movies/trending
-        /movies/latest
+Description: Retrieves the list of trending movies for the day.
+Pathname: https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_TMDB_KEY}&page=${page}
+Actor Images
+
+Description: Fetches images of a specific actor.
+Pathname: https://api.themoviedb.org/3/person/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}
+Actor Details
+
+Description: Retrieves details of a specific actor.
+Pathname: https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}
+Actors
+
+Description: Fetches a list of popular actors.
+Pathname: https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&page=${page}
+Routing
+The application has the following routing paths:
+
+/movies/watchlist
+/actors
+/actor/:id
+/movies/trending
+/movies/latest
+These routes are used to navigate through different sections and functionalities of the React Movie Labs application.
