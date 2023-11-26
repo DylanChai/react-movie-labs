@@ -1,14 +1,15 @@
-export const getMovies = () => {
+export const getMovies = (page = 1) => {
   return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
   ).then((response) => {
     if (!response.ok) {
-      throw new Error(response.json().message);
+      return response.json().then(json => {
+        throw new Error(json.message || 'Server error');
+      });
     }
     return response.json();
-  })
-  .catch((error) => {
-     throw error
+  }).catch((error) => {
+    throw error;
   });
 };
   
@@ -105,21 +106,21 @@ export const getMovie = (args) => {
    });
   }
 
-  export const getActors = () => {
-
+  export const getActors = (page = 1) => {
     return fetch(
-      `https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_TMDB_KEY}`
-    ).then( (response) => {
+      `https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&page=${page}`
+    ).then((response) => {
       if (!response.ok) {
-        throw new Error(response.json().message);
+        return response.json().then(json => {
+          throw new Error(json.status_message || 'Server error');
+        });
       }
       return response.json();
+    }).catch((error) => {
+      throw error;
+    });
+  };
   
-    })
-    .catch((error) => {
-      throw error
-   });
-  }
 
   export const getActor = (args) => {
     // console.log(args)
@@ -155,17 +156,20 @@ export const getMovie = (args) => {
    });
   };
 
-  export const getTrending = () => {
+  export const getTrending = (page = 1) => {
     return fetch(
-      `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.REACT_APP_TMDB_KEY}`
-      ).then((response) => {
-        if (!response.ok) throw new Error(response.json().message);
-        return response.json();
-    }).catch((e) => {
-        throw e
+      `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_TMDB_KEY}&page=${page}`
+    ).then((response) => {
+      if (!response.ok) {
+        return response.json().then(json => {
+          throw new Error(json.status_message || 'Server error');
+        });
+      }
+      return response.json();
+    }).catch((error) => {
+      throw error;
     });
   };
-
   export const getLatestMovies = () => {
     return fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`)
       .then(res => {

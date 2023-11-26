@@ -1,37 +1,47 @@
-import React from "react";
-import { getMovies } from "../api/tmdb-api";
-import PageTemplate from '../components/templateMovieListPage';
+import React, { useState } from "react";
 import { useQuery } from 'react-query';
+import PageTemplate from '../components/templateMovieListPage';
 import Spinner from '../components/spinner';
-import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
+import AddToFavoritesIcon from '../components/cardIcons/addToFavorites';
+import { Pagination, Stack } from '@mui/material';
+import { getMovies } from '../api/tmdb-api';
 
-const HomePage = (props) => {
-
-  const {  data, error, isLoading, isError }  = useQuery('discover', getMovies)
+const HomePage = () => {
+  const [page, setPage] = useState(1);
+  const { data, error, isLoading, isError } = useQuery(['discover', page], () => getMovies(page));
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (isError) {
-    return <h1>{error.message}</h1>
-  }  
-  const movies = data.results;
+    return <h1>{error.message}</h1>;
+  }
 
-  // Redundant, but necessary to avoid app crashing.
-  const favorites = movies.filter(m => m.favorite)
-  localStorage.setItem('favorites', JSON.stringify(favorites))
-  const addToFavorites = (movieId) => true 
+  const movies = data.results;
+  const totalPages = data.total_pages;
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
   return (
-    <PageTemplate
-      title="Discover Movies"
-      movies={movies}
-      action={(movie) => {
-        return <AddToFavoritesIcon movie={movie} />
-      }}
-    />
-);
-
+    <>
+      <PageTemplate
+        title="Discover Movies"
+        movies={movies}
+        action={(movie) => <AddToFavoritesIcon movie={movie} />}
+      />
+      <Stack spacing={2} justifyContent="center" sx={{ marginTop: 2 }}>
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={handleChangePage}
+          color="primary"
+        />
+      </Stack>
+    </>
+  );
 };
+
 export default HomePage;

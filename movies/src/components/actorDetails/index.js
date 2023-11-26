@@ -26,7 +26,7 @@ const ActorDetails = ({ actor }) => {
       </Typography>
 
       <Typography variant="h6" component="p">
-        {actor.birthday}
+        {actor.biography}
       </Typography>
 
       <Paper component="ul" sx={{...root}}>

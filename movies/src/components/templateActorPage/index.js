@@ -7,7 +7,7 @@ import { useQuery } from "react-query";
 import Spinner from '../spinner'
 import ActorHeader from "../headerActor";
 
-const TemplateActorPage = ({ actor, children}) => {
+const TemplateActorPage = ({ actor,children}) => {
   const { data , error, isLoading, isError } = useQuery(
     ["images", { id: actor.id }],
     getActorImages
@@ -20,6 +20,8 @@ const TemplateActorPage = ({ actor, children}) => {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
+
+  
   const images = data.profiles
   
   return (
@@ -45,6 +47,7 @@ const TemplateActorPage = ({ actor, children}) => {
                 ))}
             </ImageList>
           </div>
+          {children}
         </Grid>
       </Grid>
     </>
